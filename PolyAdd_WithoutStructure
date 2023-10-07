@@ -1,6 +1,9 @@
 #include <stdio.h>
 
 int main() {
+    
+    printf ("NAME: GIRIBALA ARUN\nROLL NO: 28\n\n");
+    
     int m, n, A[100], B[100], C[200];
     int i, a, p = 1, q = 1, r = 1;
     char ch;
