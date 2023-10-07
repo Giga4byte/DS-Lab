@@ -1,11 +1,19 @@
 #include <stdio.h>
 
-int Q[20];
+int Q[100];
 int front = -1, rear = -1;
 int n, item;
 
+int isEmpty() {
+    return (front == -1);
+}
+
+int isFull() {
+    return ((rear + 1) % n == front);
+}
+
 void enqueue(int item) {
-    if ((rear + 1) % n == front) {
+    if (isFull()) {
         printf("Queue is full\n");
     } else {
         rear = (rear + 1) % n;
@@ -18,7 +26,7 @@ void enqueue(int item) {
 }
 
 void dequeue() {
-    if (front == -1) {
+    if (isEmpty()) {
         printf("Queue is empty\n");
     } else {
         item = Q[front];
@@ -32,7 +40,7 @@ void dequeue() {
 }
 
 void display() {
-    if (front == -1) {
+    if (isEmpty()) {
         printf("Queue is empty\n");
     } else {
         int i = front;
@@ -50,7 +58,7 @@ int main() {
     printf("Enter the number of max elements: ");
     scanf("%d", &n);
 
-    printf("\nMENU:\n1. Enqueue\n2. Dequeue\n3. Display\n4. Break\n");
+    printf("\nMENU:\n1. Enqueue\n2. Dequeue\n3. Is Empty\n4. Is Full\n5. Display\n6. Exit\n");
 
     while (1) {
         printf("Enter the choice: ");
@@ -61,26 +69,38 @@ int main() {
                 scanf("%d", &item);
                 enqueue(item);
                 break;
-            }  // case 1
-
+            }
             case 2: {
                 dequeue();
                 break;
-            }  // case 2
-
+            }
             case 3: {
+                if (isEmpty()) {
+                    printf("Queue is empty\n");
+                } else {
+                    printf("Queue is not empty\n");
+                }
+                break;
+            }
+            case 4: {
+                if (isFull()) {
+                    printf("Queue is full\n");
+                } else {
+                    printf("Queue is not full\n");
+                }
+                break;
+            }
+            case 5: {
                 display();
                 break;
-            }  // case 3
-
-            case 4: {
+            }
+            case 6: {
                 printf("Terminating.\n");
                 return 0;
-            }  // case 4
-
+            }
             default: {
                 printf("Invalid choice!\n");
             }
-        }  // switch
-    }      // while
+        }
+    }
 }
