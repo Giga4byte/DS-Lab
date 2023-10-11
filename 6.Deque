@@ -1,69 +1,52 @@
 #include <stdio.h>
 
-int n;
+int n, item;
 int front = -1;
 int rear = -1;
 int deque[30];  // Declare an array to hold the deque elements
 
 void insertFront(int item) {
-    if (front == 0 && rear == n - 1) {
-        printf("Deque is full. Insertion at front is not possible.\n");
+    if (front == (rear-1)%n) {
+        printf("Deque is full\n");
+    } else if (front == 0) {
+        front = n - 1;
+        deque[front] = item;
+        printf("Element %d has been inserted\n", deque[front]);
     } else {
-        if (front == -1) {
-            front = rear = 0;
-            deque[front] = item;
-        } else if (front > 0) {
-            deque[--front] = item;
-        } else {
-            for (int i = rear; i >= 0; i--) {
-                deque[i + 1] = deque[i];
-            }
-            rear++;
-            deque[front] = item;
-        }
-        printf("Inserted %d at the front.\n", item);
+        front = (front - 1 + n) % n; // Handle negative values correctly
+        deque[front] = item;
+        printf("Element %d has been inserted\n", deque[front]);
     }
 }
 
 void insertRear(int item) {
-    if (front == 0 && rear == n - 1) {
-        printf("Deque is full. Insertion at rear is not possible.\n");
-    } else {
-        if (front == -1) {
-            front = rear = 0;
-            deque[rear] = item;
-        } else {
-            deque[++rear] = item;
-        }
-        printf("Inserted %d at the rear.\n", item);
+    if (front == (rear-1)%n) {
+        printf("Deque is full\n");
+    }
+    else {
+        rear = (rear+1)%n;
+        deque[rear] = item;
+        printf("Element %d has been inserted\n", deque[rear]);
     }
 }
 
 void deleteFront() {
-    if (front == -1) {
-        printf("Deque is empty. Deletion from front is not possible.\n");
+    if (front == rear) {
+        printf("Deque is empty\n");
     } else {
-        int item = deque[front];
-        if (front == rear) {
-            front = rear = -1;
-        } else {
-            front++;
-        }
-        printf("Deleted %d from the front.\n", item);
+        item = deque[front];
+        front = (front + 1) % n; // Wrap around if front reaches the end
+        printf("Element %d has been deleted\n", item);
     }
 }
 
 void deleteRear() {
-    if (front == -1) {
-        printf("Deque is empty. Deletion from rear is not possible.\n");
+    if (front == rear) {
+        printf("Deque is empty\n");
     } else {
-        int item = deque[rear];
-        if (front == rear) {
-            front = rear = -1;
-        } else {
-            rear--;
-        }
-        printf("Deleted %d from the rear.\n", item);
+        item = deque[rear];
+        rear = (rear - 1 + n) % n; // Wrap around if rear reaches the beginning
+        printf("Element %d has been deleted\n", item);
     }
 }
 
