@@ -3,7 +3,7 @@
 int n;
 int front = -1;
 int rear = -1;
-int deque[100];  // Declare an array to hold the deque elements
+int deque[30];  // Declare an array to hold the deque elements
 
 void insertFront(int item) {
     if (front == 0 && rear == n - 1) {
