@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-
 int item;
 
 struct node {
@@ -8,7 +6,7 @@ struct node {
     struct node *next;
 };
 
-struct node *p, *head, *tail, *pointer, *prev;
+struct node *p, *head, *tail, *pointer;
 
 void insertAtEnd() {
     p = (struct node *)malloc(sizeof(struct node));
@@ -48,23 +46,15 @@ void deleteFromBeginning() {
     }
 }
 
-void deleteFromEnd() {
-    if (head == NULL) {
-        printf("The linked list is empty\n");
-    } else {
-        pointer = head;
-        while (pointer->next != NULL) {
-            prev = pointer;
-            pointer = pointer->next;
-        }
-        if (pointer == head) {
-            head = NULL;
-            tail = NULL;
-        } else {
-            prev->next = NULL;
-            tail = prev;
-        }
-        free(pointer);
+void display() {
+    pointer = head;
+    printf("GIRIBALA'S LINKED LIST IS\n");
+    while (pointer != NULL) {
+        printf("%d ", pointer->data);
+        pointer = pointer->next;
+    }
+    if (pointer == NULL) {
+        return 0;
     }
 }
 
