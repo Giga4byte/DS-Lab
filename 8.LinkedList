@@ -38,21 +38,6 @@ void insertAtBeginning() {
     }
 }
 
-void insertAfterNode() {
-    p = (struct node *)malloc(sizeof(struct node));
-    printf("Enter the data: ");
-    scanf("%d", &p->data); 
-    p->next = NULL;
-    pointer = head;
-    printf("Enter the element after which the item is to be added: ");
-    scanf("%d", &item);
-    while (pointer->data != item) {
-        pointer = pointer->next;
-    }
-    p->next = pointer->next;
-    pointer->next = p;
-}
-
 void deleteFromBeginning() {
     if (head == NULL) {
         printf("The linked list is empty\n");
@@ -80,34 +65,6 @@ void deleteFromEnd() {
             tail = prev;
         }
         free(pointer);
-    }
-}
-
-void deleteAfterNode() {
-    printf("Enter the element after which the item is to be deleted: ");
-    scanf("%d", &item);
-    pointer = head;
-    while (pointer->data != item) {
-        prev = pointer;
-        pointer = pointer->next;
-    }
-    if (pointer->next == NULL) {
-        printf("No element to delete after %d\n", item);
-    } else {
-        prev->next = pointer->next;
-        free(pointer);
-    }
-}
-
-void display() {
-    pointer = head;
-    printf("GIRIBALA'S LINKED LIST IS\n");
-    while (pointer != NULL) {
-        printf("%d ", pointer->data);
-        pointer = pointer->next;
-    }
-    if (pointer == NULL) {
-        return 0;
     }
 }
 
