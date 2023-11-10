@@ -1,3 +1,5 @@
+// THIS IS INCOMPLETE. DON'T BOTHER COPY-PASTING.
+
 #include <stdio.h>
 int item;
 
