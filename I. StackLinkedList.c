@@ -30,20 +30,21 @@ void pop ()
     if (top == NULL)
     {   printf ("Stack is empty\n");  }
     else
-    {   top = top->next;
-        free (p);
-        p = top;
+    {   pointer = top;
+        top = top->next;
+        free (pointer);
         printf ("Element deleted\n");   }
 }
 
 void display () 
 {
+    pointer = top;
     if (top == NULL)
     {   printf ("Stack is empty\n");  }
     else
-    {   while (p!=NULL)
-        {   printf ("%d\t", p->data);
-            p = p->next;    }    }
+    {   while (pointer!=NULL)
+        {   printf ("%d\t", pointer->data);
+            pointer = pointer->next;    }    }
 }
 
 int main() {
