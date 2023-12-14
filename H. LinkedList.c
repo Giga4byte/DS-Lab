@@ -1,83 +1,160 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int item;
+
 struct node {
-    int data;
-    struct node *next;
+	int data;
+	struct node *next;
 };
 
-struct node *p, *front, *rear, *ptr;
+struct node *p, *head, *tail, *pointer, *previous;
 
-void enqueue() {
-    p = (struct node *)malloc(sizeof(struct node));
-    printf("Enter the data: ");
-    scanf("%d", &p->data);
-    if (front == NULL && rear == NULL) {
-        front = p;
-        rear = p;
-        printf("Element entered\n");
-    } else {
-        rear->next = p;
-        rear = p;
-        printf("Element entered\n");
-    }
+void insertAtEnd ()
+{
+	p = (struct node*)malloc(sizeof(struct node));
+	printf ("Enter the element to be inserted: ");
+	scanf ("%d", &p->data);
+	p->next = NULL;
+	if (head == NULL)
+	{
+		head = p;
+		tail = p;
+	}
+	else
+	{
+		tail->next = p;
+		tail = p;
+	}
 }
 
-void dequeue() {
-    if (front == NULL) {
-        printf("Queue is empty, cannot dequeue\n");
-    } else if (front == rear) {
-        front = NULL;
-        rear = NULL;
-        printf("Element deleted\n");
-    } else {
-        ptr = front;
-        front = ptr->next;
-        free(ptr);
-        printf("Element deleted\n");
-    }
+void insertAtBeginning () 
+{
+	p = (struct node*)malloc(sizeof(struct node));
+	printf ("Enter the element to be inserted: ");
+	scanf ("%d", &p->data);
+	p->next = NULL;
+	if (head == NULL)
+	{
+		head =p;
+		tail = p;
+	}
+	else
+	{
+		p->next = head;
+		head = p;
+	}
 }
 
-void display() {
-    ptr = front;
-    if (front == NULL) {
-        printf("Queue is empty\n");
-    } else {
-        while (ptr != NULL) {
-            printf("%d\t", ptr->data);
-            ptr = ptr->next;
-        }
-        printf("\n");
-    }
+void insertAfterNode ()
+{
+	p = (struct node*)malloc(sizeof(struct node));
+	printf ("Enter the element to be inserted: ");
+	scanf ("%d", &p->data);
+	p->next = NULL;
+	pointer = head;
+	printf ("Enter the node: ");
+	scanf ("%d", &item);
+	while (pointer->data != item)
+	{
+		pointer  = pointer->next;
+	}
+	p->next=pointer->next;
+	pointer->next=p;
 }
 
-int main() {
-    int choice = 0;
-    front = NULL;
-    rear = NULL;
-    printf("NAME: GIRIBALA\tROLL NO:28\n");
-    printf("MENU\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+void deleteFromBeginning ()
+{
+	if (head == NULL)
+	{ printf ("LIST IS EMPTY\n"); }
+	else
+	{
+		pointer = head;
+		head = pointer->next;
+		free (pointer);
+	}
+}
 
-    while (1) {
-        printf("\nEnter your choice: ");
-        scanf("%d", &choice);
+void deleteFromEnd ()
+{
+	if (head == NULL)
+	{ printf ("LIST IS EMPTY"); }
+	else
+	{
+		pointer = head;
+		while (pointer->next != NULL)
+		{
+			previous = pointer;
+			pointer = pointer->next;
+		}
+		previous->next = NULL;
+		tail = previous;
+		free (pointer);
+	}
+}
 
-        switch (choice) {
-        case 1:
-            enqueue();
-            break;
-        case 2:
-            dequeue();
-            break;
-        case 3:
-            display();
-            break;
-        case 4:
-            printf("TERMINATED\n");
-            return 0;
-        default:
-            printf("INVALID CHOICE, TRY AGAIN\n");
-        }
-    }
-    return 0;
+void deleteNode ()
+{
+	printf ("Enter the node: ");
+	scanf ("%d", &item);
+	pointer = head;
+	//previous = head;
+	if (head == NULL) {
+	printf ("Empty list.\n"); }
+	else {
+	while (pointer->data != item);
+	{
+		previous = pointer;
+		pointer = pointer->next;
+	}
+	previous->next = pointer->next;
+	free (pointer); }
+}
+
+void display ()
+{
+	if (head == NULL)
+	{ printf ("LIST IS EMPTY\n"); }
+	else
+	{
+		pointer = head;
+		while (pointer->next != NULL)
+		{
+			printf ("%d\t", pointer->data);
+			pointer = pointer->next;
+		}
+		printf ("%d\t", pointer->data);
+	}
+}
+
+int main ()
+{
+	int choice = -1; head = NULL;
+	printf ("MENU\n1. End Insert\n2. Beginning Insert\n3. Node Insert\n4. End Delete\n5. Beginning Delete\n6. Node Delete\n7. Display\n8. Exit\n");
+	while (1)
+	{
+		printf ("\nEnter choice: ");
+		scanf ("%d", &choice);
+		switch (choice)
+		{
+			case 1: insertAtEnd();
+					break;
+			case 2: insertAtBeginning();
+					break;
+			case 3: insertAfterNode();
+					break;
+			case 4: deleteFromBeginning();
+					break;
+			case 5: deleteFromEnd();
+					break;
+			case 6: deleteNode();
+					break;
+			case 7: display();
+					break;
+			case 8: printf ("TERMINATED\n");
+					return 0;
+			default: printf ("INVALID CHOICE\n");
+		}
+	}
+	return 0;
 }
