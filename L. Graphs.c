@@ -151,5 +151,3 @@ void main()
         }
     }
 }
-
-// go say thanks to Kesiya, you shits
