@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct node
+struct node 
 { int vertex;
   struct node *next; };
 struct node *p;
