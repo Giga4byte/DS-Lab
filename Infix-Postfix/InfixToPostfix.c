@@ -3,7 +3,6 @@
 #include <math.h>
 #include <ctype.h>
 
-
 char infix[10];
 char postfix[10];
 char stack[10];
